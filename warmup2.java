@@ -1,16 +1,17 @@
 import java.util.Scanner;
 
 public class warmup2{
-    public static void main(String args[])
+    public static void main(String args[]) throws Exception
     {
         Scanner scanner = new Scanner(System.in);
         int num1;
         int num2;
+        int contadorGeral = 0;
 
-        while (scanner.hasNextInt())
+        do
         {
-            num1 = MyIO.readInt();
-            num2 = MyIO.readInt();
+            num1 = scanner.nextInt();
+            num2 = scanner.nextInt();
             
 
             if(num1 > num2)
@@ -21,18 +22,16 @@ public class warmup2{
                 for(int i = 0; i < array.length/2; i++)
                 {
                     array[i] = num2 + contador;
+                    System.out.print(array[i]);
                     contador++;
                 }
-                for(int i = array.length-1; i >= array.length/2; i--)
+                contador = 0;
+                for(int i = array.length/2; i < array.length; i++)
                 {
-                    contador--;
-                    array[i] = num1 - contador; 
+                    array[i] = mirrorNum((num1 - contador));
+                    contador++; 
                 }
-                for (int i = 0; i < array.length; i++)
-                {
-                    System.out.print(array[i]);
-                }
-                 System.out.println("");
+                System.out.println("");
             }
             else if (num2 > num1)
             {
@@ -42,18 +41,16 @@ public class warmup2{
                 for(int i = 0; i < array.length/2; i++)
                 {
                     array[i] = num1 + contador;
+                    System.out.print(array[i]);
                     contador++;
                 }
-                for(int i = array.length-1; i >= array.length/2; i--)
+                contador = 0;
+                for(int i = array.length/2; i < array.length; i++)
                 {
-                    contador--;
-                    array[i] = num2 - contador; 
+                    array[i] = mirrorNum((num2 - contador));
+                    contador++; 
                 }
-                for (int i = 0; i < array.length; i++)
-                {
-                    System.out.print(array[i]);
-                }
-                 System.out.println("");
+                System.out.println("");
             }
             else
             {
@@ -69,8 +66,25 @@ public class warmup2{
                 }
                  System.out.println("");
             }
-            
-        }
+            contadorGeral ++;
+        }while (contadorGeral < 3);
         scanner.close();
+    }
+
+
+    public static int mirrorNum (int numero) throws Exception
+    {
+        String espelho = Integer.toString(numero);
+        String newEspelho = "";
+
+        for (int i = espelho.length()-1; i >= 0 ; i--)
+        {
+            newEspelho += espelho.charAt(i);
+        }
+
+        MyIO.print(newEspelho);
+        numero = Integer.parseInt(newEspelho);
+
+        return numero;
     }
 }
